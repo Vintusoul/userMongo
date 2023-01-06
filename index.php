@@ -33,7 +33,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Date Of Birth</label>
-                        <input type="date" class="form-control" required aria-describedby="dateOfBirthHelp" name="birthday" value="<?php if (isset($_POST['birthday'])) {
+                        <input type="date" class="form-control" required aria-describedby="dateOfBirthHelp" name="birthday" value="<?php
+                                                                                                                                    if (isset($_POST['birthday'])) {
                                                                                                                                         echo htmlentities($_POST['birthday']);
                                                                                                                                     } ?>" />
                     </div>
@@ -60,7 +61,7 @@ use MongoDB\Client;
 try {
 
     if ($_POST)
-        $client = new Client($_ENV['DATABASE_URL']); //connects to the localhost database,can be changed to online database
+        $client = new Client($_ENV['DATABASE_URL']); // add connection string here
     $db = $client->selectDatabase("Users");
     $collection = $db->userDetails;
 
