@@ -17,7 +17,7 @@
                 <form action="index.php" method="post">
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="name" class="form-control" required aria-describedby="nameHelp" name="name" value="<?php if (isset($_POST['name'])) {
+                        <input type="text" class="form-control" required aria-describedby="nameHelp" name="name" value="<?php if (isset($_POST['name'])) {
                                                                                                                             echo htmlentities($_POST['name']);
                                                                                                                         } ?>" />
                     </div>
@@ -71,6 +71,9 @@ try {
     $idNr = $_POST['identityNr'];
     $birth = $_POST['birthday'];
 
+    $dateFormat = strtotime($birth);
+    $newDate = date("d/m/Y", $dateFormat);
+
     // retrieves id from db
     $findId = $collection->findOne(
         ['identityNr' =>  $idNr]
@@ -82,7 +85,7 @@ try {
             'name' => $name,
             'surname' => $surname,
             'identityNr' =>  $idNr,
-            'birthday' => $birth
+            'birthday' => $newDate
         ];
 
     if ($findId['identityNr'] !== $idNr && strlen($_POST['identityNr']) == 13) {
